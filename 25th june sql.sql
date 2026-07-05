@@ -100,3 +100,81 @@ Alter Table Customers add Address2 Varchar(50) after Phone;
 #Drop database BankingDB;
 
 #Delete from Customers ;
+
+
+Insert Into Customers(CustomerID, FName, LName ,email, Address2, AccountCreationDate, Phone, Address)
+Values
+(1,"Rahul","Sharma", "rahul@gmail.com", "Mumbai","2025-01-10", "9899765421","Andheri"),
+(2,"Ramesh","Sharma", "ramesh@gmail.com", "Mumbai","2025-02-10", "9689765421","Andheri");
+
+desc Customers;
+
+#use itvedant;
+select * from Customers;
+create table Cus_backup
+(
+CustomerID int ,
+FName Varchar(50),
+LName Varchar(50),
+Email Varchar(50),
+Phone Varchar(15),
+Address2 varchar(50),
+AccountCreationDate Date
+)
+select * from Customers;
+#copy from one table to another 
+insert into Cus_backup(CustomerID,FName, LName, email, Phone, Address2, AccountCreationDate)
+
+select * from Cus_backup;
+select CustomerID, FName , LName , Email from Customers; 
+
+#Default in Asc
+select * from Customers order by FName;
+select * from Customers order by FName desc;
+insert into Customers(CustomerID, FName, LName ,email, Address2, AccountCreationDate, Phone) values 
+(4,"Rajesh","Sharma", "rajesh@gmail.com", "Mumbai","2025-02-10", "9689767421"),
+(5,"Hiesh","Sharma", "hitesh@gmail.com", "Mumbai","2025-08-10", "9689765821"),
+(6,"Rohan","Verma", "rohan@gmail.com", "Mumbai","2025-02-10", "9989765481");
+
+select Address2 , count(FName) as Total from Customers 
+group by Address2;
+
+Alter table Customers add DOB Date;
+
+Alter table Customers drop DOB ;
+
+select * from Customers limit 3;
+
+select * from Customers limit 3 offset 2;
+
+
+
+select Address2 , count(FName) as Total from Customers 
+group by Address2 having count(FName) > 10;
+select * from Customers where FName like 'R%';  # start with R
+select * from Customers where FName like '%h';   #End with h
+select * from Customers where FName like '_a%';  # start with any single character and 2nd place must be 'a' and end with any letter.
+
+
+insert into Customers(CustomerID, FName, LName, Email) values(101, "Mukesh", "Singh", "mukesh@gmail.com");
+desc Customers;
+select * from Customers;
+select * from Customers where Phone is null;
+select * from Customers where Phone is not null;
+desc Accounts;
+insert into Accounts(AccountID, CustomerID, AccountTYpe, Balance) values 
+(100024, 1, "Savings", 2390.56),
+(105634, 2, "Current", 2890.56),
+(105723, 3, "Savings", 2390.56),
+(104120, 4, "Current", 2000.56),
+(102933, 5, "Bussiness", 120090.56),
+(104832, 6, "Current", 3490);
+
+select * from Customers where Email is null;
+select * from Accounts where Amount is not null;
+select * from Transactions order by Amount desc limit 3;
+select * from Customers order by LName;
+select * from Customers limit 3 offset 3;
+
+select distinct(TransactionID) from Transactions;
+desc Transactions;
